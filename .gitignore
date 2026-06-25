@@ -1,0 +1,9 @@
+# 認証トークン（万一リポジトリ内に置かれても絶対にコミットしない）
+*.token
+judge-critique.token
+
+# OS / エディタの生成物
+Thumbs.db
+.DS_Store
+desktop.ini
+*~
