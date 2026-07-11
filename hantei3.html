@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天使れむ太乃助 対 伊崎 ——判定と批評</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Noto+Serif+JP:wght@400;500;600&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --washi:#0c0d0f;
+    --washi-2:#17181c;
+    --sumi:#ECEDEA;
+    --sumi-soft:#AEB1B6;
+    --ai:#8FB3D4;
+    --ai-deep:#B6D2EA;
+    --shu:#E14B3A;
+    --shu-text:#EF6A54;
+    --kasumi:#8B8E94;
+    --rule:rgba(255,255,255,.09);
+    --rule-mid:rgba(255,255,255,.18);
+  }
+  *{box-sizing:border-box}
+  html{font-size:106.25%;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--washi);
+    color:var(--sumi);
+    font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-weight:400;
+    line-height:1.95;
+    letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:rgba(225,75,58,.30)}
+  .wrap{max-width:43rem;margin:0 auto;padding:0 1.6rem}
+
+  /* ---- masthead ---- */
+  .masthead{padding:5.5rem 0 0}
+  .eyebrow{
+    font-family:"Noto Sans JP",sans-serif;font-weight:700;
+    font-size:.72rem;letter-spacing:.42em;color:var(--shu-text);
+    margin:0 0 1.7rem;text-indent:.42em;
+  }
+  h1.title{
+    font-family:"Shippori Mincho",serif;font-weight:800;
+    font-size:clamp(2.5rem,8vw,3.7rem);line-height:1.12;
+    letter-spacing:.04em;margin:0;color:var(--sumi);
+  }
+  .subtitle{
+    font-family:"Shippori Mincho",serif;font-weight:500;
+    font-size:clamp(1.15rem,3.4vw,1.5rem);letter-spacing:.08em;
+    color:var(--ai);margin:.9rem 0 0;
+  }
+  .rule2{display:flex;align-items:center;gap:0;margin:2.2rem 0 1.6rem}
+  .rule2 .seg-a{height:2px;width:3.2rem;background:var(--shu)}
+  .rule2 .seg-b{height:1px;flex:1;background:var(--rule-mid)}
+  .dek{
+    font-size:1.04rem;color:var(--sumi-soft);margin:0;
+    line-height:1.95;
+  }
+  .meta-line{
+    font-family:"Noto Sans JP",sans-serif;font-weight:500;
+    font-size:.8rem;letter-spacing:.08em;color:var(--kasumi);
+    margin:1.5rem 0 0;
+  }
+  .meta-line b{color:var(--sumi);font-weight:700}
+
+  /* ---- generic section ---- */
+  section{padding:3.6rem 0 0}
+  .label{
+    font-family:"Noto Sans JP",sans-serif;font-weight:700;
+    font-size:.74rem;letter-spacing:.34em;color:var(--ai);
+    margin:0 0 1.1rem;text-indent:.34em;
+  }
+  p{margin:0 0 1.35rem}
+  p.lead{margin-top:.2rem}
+
+  /* ---- framing block ---- */
+  .frame{
+    border-top:1px solid var(--rule);
+    margin-top:3.4rem;padding-top:2.6rem;
+  }
+  .frame p{color:var(--sumi-soft)}
+
+  /* ---- verdict block ---- */
+  .verdict{
+    margin-top:3.6rem;
+    background:var(--washi-2);
+    border:1px solid var(--rule);
+    border-left:3px solid var(--shu);
+    padding:2.5rem 2rem 2.2rem;
+  }
+  .verdict .label{color:var(--shu-text)}
+  .verdict-head{
+    display:flex;flex-wrap:wrap;align-items:center;gap:1.1rem 1.4rem;
+    margin:0 0 1.7rem;
+  }
+  .verdict-lead{
+    font-family:"Shippori Mincho",serif;font-weight:600;
+    font-size:1.34rem;line-height:1.5;letter-spacing:.04em;
+    margin:0;color:var(--sumi);
+  }
+  .seal{
+    flex:0 0 auto;
+    display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
+    border:2px solid var(--shu);
+    color:var(--shu-text);
+    padding:.5rem .8rem .55rem;
+    transform:rotate(-3deg);
+    box-shadow:0 0 0 3px var(--washi-2),0 0 0 4px rgba(225,75,58,.40);
+  }
+  .seal .seal-k{font-family:"Noto Sans JP",sans-serif;font-weight:700;font-size:.6rem;letter-spacing:.3em;text-indent:.3em;margin-bottom:.18rem}
+  .seal .seal-n{font-family:"Shippori Mincho",serif;font-weight:800;font-size:1.4rem;letter-spacing:.06em;line-height:1}
+  .reason{margin:1.7rem 0 0}
+  .reason h3{
+    font-family:"Noto Sans JP",sans-serif;font-weight:700;
+    font-size:.96rem;letter-spacing:.04em;color:var(--ai-deep);
+    margin:0 0 .55rem;
+  }
+  .reason h3 .rn{color:var(--shu-text);margin-right:.5em}
+  .reason p{margin:0;color:var(--sumi)}
+  .verdict-note{
+    margin-top:2rem;padding-top:1.6rem;border-top:1px dashed var(--rule-mid);
+    font-size:.97rem;color:var(--sumi-soft);
+  }
+  .verdict-note p{margin:0}
+
+  /* ---- criticism sections ---- */
+  .crit-open{border-top:1px solid var(--rule);margin-top:4rem;padding-top:2.6rem}
+  .legend{
+    font-family:"Noto Sans JP",sans-serif;font-size:.78rem;
+    letter-spacing:.04em;color:var(--kasumi);
+    margin:0 0 .4rem;line-height:1.7;
+  }
+  .legend .mk{margin-right:.15em}
+  .sec-h{margin:0 0 1.6rem}
+  .sec-eyebrow{
+    font-family:"Noto Sans JP",sans-serif;font-weight:700;
+    font-size:.7rem;letter-spacing:.34em;color:var(--ai);
+    display:block;margin-bottom:.7rem;text-indent:.34em;
+  }
+  .sec-title{
+    font-family:"Shippori Mincho",serif;font-weight:600;
+    font-size:1.42rem;line-height:1.4;letter-spacing:.04em;
+    margin:0;color:var(--sumi);
+    display:flex;align-items:baseline;gap:.6rem;
+  }
+  .sec-num{
+    font-family:"Shippori Mincho",serif;font-weight:800;
+    font-size:2.5rem;line-height:.8;color:var(--ai);
+    flex:0 0 auto;letter-spacing:0;
+  }
+
+  /* inline marks & accents */
+  .mk{font-family:"Noto Sans JP",sans-serif;font-weight:700;color:var(--shu-text);font-size:.82em;display:inline-block}
+  .mk.up{}
+  .mk.down{}
+  .u{color:var(--shu-text)}
+  .k{color:var(--ai-deep);font-weight:500}
+  .nm{font-weight:600;letter-spacing:.03em}
+
+  /* ---- colophon ---- */
+  footer{
+    border-top:1px solid var(--rule);
+    margin-top:4.2rem;padding:2.4rem 0 5rem;
+    font-family:"Noto Sans JP",sans-serif;
+    font-size:.82rem;line-height:1.85;letter-spacing:.03em;color:var(--kasumi);
+  }
+  footer p{margin:0 0 .7rem}
+  footer a{color:var(--ai);text-decoration:none;border-bottom:1px solid rgba(143,179,212,.35);padding-bottom:1px}
+  footer a:hover{color:var(--shu-text);border-bottom-color:rgba(239,106,84,.55)}
+  a:focus-visible{outline:2px solid var(--shu);outline-offset:3px;border-radius:1px}
+
+  /* ---- motion ---- */
+  .anim{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+  .d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.27s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .anim{animation:none;opacity:1;transform:none}
+  }
+
+  /* ---- responsive ---- */
+  @media (max-width:560px){
+    html{font-size:100%}
+    .masthead{padding:3.8rem 0 0}
+    .verdict{padding:2rem 1.3rem 1.8rem}
+    .verdict-head{gap:1rem}
+    .sec-title{gap:.45rem}
+    .sec-num{font-size:2rem}
+    .seal{transform:rotate(-3deg) scale(.95)}
+  }
+  /* ---- top nav / back ---- */
+  .topnav{padding:1.8rem 0 0}
+  .backlink{display:inline-flex;align-items:center;gap:.4rem;font-family:"Noto Sans JP",sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.08em;color:var(--kasumi);text-decoration:none;border:1px solid var(--rule-mid);border-radius:999px;padding:.4rem .95rem;transition:color .15s ease,border-color .15s ease}
+  .backlink:hover{color:var(--shu-text);border-color:var(--shu)}
+  /* ---- source link (masthead) ---- */
+  .src-line{font-family:"Noto Sans JP",sans-serif;font-weight:500;font-size:.8rem;letter-spacing:.06em;color:var(--kasumi);margin:.7rem 0 0}
+  .src-line a{color:var(--ai);text-decoration:none;border-bottom:1px solid rgba(143,179,212,.4);padding-bottom:1px}
+  .src-line a:hover{color:var(--shu-text);border-bottom-color:var(--shu)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav"><a class="backlink" href="index.html">&larr; 一覧へ戻る</a></nav>
+
+  <header class="masthead">
+    <p class="eyebrow anim d1">喧嘩　判定・批評</p>
+    <h1 class="title anim d1">天使れむ太乃助 対 伊崎</h1>
+    <p class="subtitle anim d2">問いは誰の手に残ったか</p>
+    <div class="rule2 anim d2"><span class="seg-a"></span><span class="seg-b"></span></div>
+    <p class="dek anim d3">文面喧嘩の盤で行われたのは、今回は珍しく、礼節を保ったディベートである。だが礼節の下でも格付けは進行する──問いを支配したのは誰か、最後に沈黙したのは誰か、そして横合いから投げ込まれた罵倒を、誰がどれだけの余裕で受けたか。本稿はまず勝敗を理由とともに判定し、続いて一手一手を批評する。</p>
+    <p class="meta-line anim d3">対戦：<b>天使れむ太乃助</b>（反対側・受けて立つ側）　×　<b>伊崎</b>（肯定側・論題を持ち込んだ側）　　乱入：<b>大気汚染</b></p>
+    <p class="src-line anim d3">元の喧嘩：<a href="https://nokimoti.github.io/kenka-log/log8.html">kenka-log ／ log8</a></p>
+  </header>
+
+  <!-- FRAMING -->
+  <section class="frame">
+    <p class="label">前提 ──この勝負の測り方</p>
+    <p class="lead">文面喧嘩は、議論やディベートとは似て非なるものである。競われるのは主張の正しさではなく、相手をいかに格下の存在に見せ、自分を相対的に上へ置けるか──〈存在の格付け〉の奪い合いである。論理と煽りを別々の採点表に分けてはならず、一手の意味は応酬全体のなかで定まる。最も重い失点は〈無様〉、すなわち余裕を失って取り乱した無格好である。</p>
+    <p>ただし今回は但し書きが要る。この一戦は「文面喧嘩」のカテゴリに立ちながら、当人たちは終始ディベートとして振る舞い、互いに楽しさまで口にした。喧嘩とディベートは本来別のゲームである。それでもこの盤を喧嘩の物差しで測れるのは、礼節の下でも序列は動くからだ。誰が争点を定義し続けたか。誰が答えを持たぬまま退場したか。そして本編の脇では、正真正銘の喧嘩──論理を伴わぬ剥き出しの罵倒──が並行して進行していた。判定はこの二枚の盤をまとめて読む。</p>
+  </section>
+
+  <!-- VERDICT -->
+  <section>
+    <div class="verdict">
+      <p class="label">判定</p>
+      <div class="verdict-head">
+        <p class="verdict-lead">結論から述べる。この一戦、勝者は天使れむ太乃助である。圧勝と呼ぶには相手の崩れが足りない。だが盤が閉じたとき、問いを握って立っていたのは彼女だけであった。</p>
+        <span class="seal" aria-label="勝者 天使れむ太乃助">
+          <span class="seal-k">勝</span>
+          <span class="seal-n">れむ</span>
+        </span>
+      </div>
+
+      <div class="reason">
+        <h3><span class="rn">一</span>立証責任という枠の支配</h3>
+        <p>天使れむ太乃助は最初の長文から一貫して同じ構えを取った。格差是正には賛成する、富の影響力も否定しない、資産形成が社会の基盤に支えられている点も認める──そう譲れるものをすべて譲ったうえで、<span class="u">「だから個人の資産に上限を設けるべき」って結論に至る部分</span>にだけ指を置き、その隙間を埋める責任を相手の側に置いた。以後、毎回の応酬は「伊崎が立証を果たせたか」を審査する形式で進み、伊崎はその枠を一度も疑わずに受け入れた。問いは回を追うごとに値上がりする。初めは「資産上限でなければならない決定的な理由は何か」、次には「その利益が副作用を上回ると言える根拠は何か」。何を示せば勝ちになるかを決める権利を、彼女が最後まで手放さなかった。</p>
+      </div>
+
+      <div class="reason">
+        <h3><span class="rn">二</span>相手の最良の一打を受け切ったこと</h3>
+        <p>伊崎の五時の長文は、この盤における彼の頂点である。累進課税は<span class="u">「富が形成された後に一部を回収する仕組み」</span>であり、資産上限は<span class="u">「富が無制限に集中すること自体を防ぐ制度」</span>である──回収と予防、対症療法と原因。この区別は本物であり、並の相手なら土俵を割っていた。だが彼女はこの区別を否定せず、まるごと呑み込んだ。「目的の違いは理解した」と認めたうえで、それは「何が違うか」の答えであって「なぜそれでなければならないか」の答えではない、と切り分け、副作用の列挙──資本流出、租税回避、資産評価の困難、行政コスト、投資意欲──で問いの値をさらに吊り上げた。最良の一打が吸収されたとき、伊崎の手札は尽きていた。</p>
+      </div>
+
+      <div class="reason">
+        <h3><span class="rn">三</span>終局の沈黙</h3>
+        <p>彼女の最後の長文は、残り一レスで締めたいという断りとともに、二つの明示的な問いで終わっている。それへの返答は、ついに来なかった。沈黙の符号は文脈で反転する──ここでは伊崎が鯖から蹴られたらしいという外因があり、敗走の黙認と断ずることはできない。だが記録の上では、問いは宙に浮いたまま彼女の手に残り、幕引きの言葉──<span class="u">「此処で終わろうと思います」</span>──まで彼女が書いた。不在の者は記録に抗弁できない。この盤の墓碑銘を刻んだのは勝者の側である。</p>
+      </div>
+
+      <div class="reason">
+        <h3><span class="rn">四</span>第二の盤での余裕</h3>
+        <p>本編と並行して、大気汚染が投げ込んだ<span class="u">「しね」「早く死ね」「はよ死ねブス」</span>という剥き出しの音量があった。彼女の応手は<span class="u">「生きてたんですか？(笑)」「死んでるかと思いました(笑)」</span>──死ねと命じた者へ、死んでいたのはお前の方に見えた、と返す転倒である。一方の盤で丁寧語のディベートを運びながら、もう一方の盤で嘲笑を運ぶ。二つの温度を混線させずに並走させたこと自体が、余裕の証明であった。なお大気汚染については番外で言い添える。論理的正当化を一切伴わぬ罵倒は煽りですらなく、ただの音量である。三日おきに戻ってきて同じ語彙を繰り返す姿は、憎悪ではなく執着の告白であり、この盤の最下位は動かない。</p>
+      </div>
+
+      <div class="verdict-note">
+        <p>ただし公平のために付言する。伊崎は論題を自分で持ち込み、あえて急進的な政策を擁護する困難な側に立ち、最後まで一度も取り乱さなかった。彼の失点はすべて不在の形をしており、無様の形をしていない。回収と予防の区別は、この応酬全体で最も鮮やかな概念の一打でもあった。対する天使れむ太乃助の勝ち方は徹頭徹尾〈受け〉である。彼女は自らの対案を一度も賭け金として差し出しておらず、現状維持側の安全な席から審査を続けた。攻めの不在を重く見る読み手なら、この勝利の点差をさらに縮めるだろう。加えて「残り一レスで終わり」の申し出は、礼儀であると同時に退場の準備でもあり、もし伊崎が最後の一打を届けていれば、盤は彼が優勢のまま凍結された可能性がある。彼女の勝利には、相手の不在という僥倖が一枚噛んでいる。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRITICISM -->
+  <section class="crit-open">
+    <p class="label">批評 ──過程の腑分け</p>
+    <p class="legend"><span class="mk up">▲</span>＝相手の格を削った／自らの格を上げた有効手　<span class="mk down">▼</span>＝自らの格を下げた手</p>
+  </section>
+
+  <section>
+    <header class="sec-h">
+      <span class="sec-eyebrow">序盤</span>
+      <h2 class="sec-title"><span class="sec-num">一</span>開幕の値付け</h2>
+    </header>
+    <p class="lead">「どなたか」──深夜一時の果たし状に最初に応じたのは、挑戦者ではなく下品な野次だった。大気汚染の<span class="u">「あなるみせれるん？」</span>に対する彼女の初手、<span class="mk up">▲</span><span class="u">「勝ったら考えます〜」</span>は小さいが完成された一手である。卑猥な挑発を正面から拒めば動揺と読まれ、乗れば格を落とす。彼女はそのどちらも選ばず、相手の要求を「まず勝ってから言え」という賭けの条件に変換した。挑発の主導権はこの瞬間に移り、大気汚染は以後、本編が終わるまで言葉を失う。</p>
+    <p>続いて伊崎が名乗りを上げ、両者は丁寧語で立礼を交わす。伊崎の論題提案──<span class="u">「今日社会の勉強したんだけど気になってるんだよね」</span>──は好感の持てる誠実さだが、格付けの盤では両義的である。習いたての主題を自分から差し出すことは、以後の全主張に「借り物」という含みを許す先行投資であり、相手に教師の椅子を勧めているに等しい。彼女が終盤に漏らした<span class="u">「語り合うみたいな感じのディベートは知識も増えるし有難いです〜！」</span>という好意的な総括すら、読みようによっては教師の採点簿である。</p>
+  </section>
+
+  <section>
+    <header class="sec-h">
+      <span class="sec-eyebrow">主戦</span>
+      <h2 class="sec-title"><span class="sec-num">二</span>譲って、絞って、値を上げる</h2>
+    </header>
+    <p class="lead">彼女の長文は三通とも同じ設計図で建っている。まず全面的に譲歩する──格差是正には賛成、影響力も否定しない、目的の違いも理解した。次に推論の継ぎ目を一点まで絞る──<span class="u">「富の集中が共通要因である事」と「だから資産上限が最も合理的な解決策である事」は別問題</span>。そして対案を並べ──累進課税、相続税、独占禁止法、政治資金制度──最後に、前回より高い値札のついた問いで締める。<span class="mk up">▲</span>この反復構造こそ彼女の主戦兵器である。譲歩は寛大さの演出であると同時に、争点を相手の立証責任ただ一点へ圧縮する装置であり、伊崎は毎回、狭くなっていく土俵の中央へ自分から歩いて行った。</p>
+    <p><span class="mk up">▲</span>伊崎の側にも見事な瞬間はあった。前述の回収と予防の区別に加え、独禁法や政治資金規制を<span class="u">「対症療法」</span>と括り、その根底に「極端な富の集中」という共通の原因を置く構図は、個別制度の列挙という彼女の防壁を一枚の絵で迂回しようとする、構想力のある応手である。だが<span class="mk down">▼</span>その同じ文章に、彼は「(はず)」「思っちゃうところ」「どうも思うんです」という自信のなさの句読点を撒き続けた。断言が必要な頂点で語尾が萎む。この癖は内容の瑕疵ではなく呈示の瑕疵だが、格付けの盤では呈示がすべてである。さらに<span class="mk down">▼</span>「制度設計の困難は採用を否定する理由ではなく設計の問題だ」という切り返しは、一見手堅いが、彼女に<span class="u">「制度は理念だけではなく『現実に運用できるのか』という点まで含めて評価されるべき」</span>と正面から返される扉を自分で開けており、彼はこの反駁に再反論する機会を持たないまま盤を去ることになった。</p>
+  </section>
+
+  <section>
+    <header class="sec-h">
+      <span class="sec-eyebrow">幕間</span>
+      <h2 class="sec-title"><span class="sec-num">三</span>音量だけの乱入者</h2>
+    </header>
+    <p class="lead">本編が静止した翌日、大気汚染が戻ってくる。<span class="u">「しね」</span>。三日後、<span class="u">「早く死ね」</span>。さらに<span class="u">「はよ死ねブス」</span>。<span class="mk down">▼</span>この様式で最も安い手である。論理と煽りは一体でこそ切れ味を持つ──論理的正当化を欠いた罵倒は相手の格を一寸も削らず、発話者の語彙の底だけを晒す。しかも三日おきに同じ場所へ同じ言葉を置きに戻る反復は、当人の意図に反して、無視され続けている者の執着を時系列で記録してしまった。</p>
+    <p>彼女の受けは的確だった。<span class="mk up">▲</span><span class="u">「死にませんよ〜」</span>は命令文を予報のように受け流し、<span class="u">「生きてたんですか？(笑)死んでるかと思いました(笑)」</span>は、死を命じる者こそ盤の上で死んでいた──不在だった──という転倒で、罵倒の刃をそのまま持ち主へ返した。ただし一点だけ留保する。二度繰り返された顔文字の哄笑「(≧з≦)ﾌﾟﾌﾟﾌﾟ」は、この相手には十分だが、優雅とは言い難い。練達の喧嘩師は禁止語に頼らぬのと同じ理由で、記号の哄笑にも頼らない。最下層の相手だから減点にならぬだけで、格上との盤で同じ手は軽さと読まれるだろう。</p>
+  </section>
+
+  <section>
+    <header class="sec-h">
+      <span class="sec-eyebrow">終盤・収支</span>
+      <h2 class="sec-title"><span class="sec-num">四</span>沈黙の帰属</h2>
+    </header>
+    <p class="lead">終盤の焦点は、返ってこなかった一レスの意味である。彼女の最終弁は「残り一レスで終わりだと助かります」という断りを添えて放たれた。<span class="mk down">▼</span>この断り自体は諸刃である。都合による退場予告は礼儀だが、最も問いが重くなった局面での時限設定は、読みようによっては安全装置にも見える。寝落ちの自白──<span class="u">「# 後昨日寝ちゃって朝返せなかったです・・・」</span>──や「冪」「間だ」の変換の粗も、小さな失点として勘定に入る。</p>
+    <p>だが伊崎は、その最後の一レスを打たなかった。外因はある──鯖を蹴られたらしい、という彼女の伝聞がそれだ。沈黙の符号は文脈で反転する以上、これを全面的な黙認とは数えない。それでも動かない事実が二つある。問いは彼女の手に残ったこと。そして幕引きの言葉を書いたのが彼女であること。<span class="mk up">▲</span><span class="u">「伊崎はディベートをもう終了にするぽいし、鯖蹴られた様ですので、此処で終わろうと思います」</span>──この一文は事務連絡の顔をした戦果報告であり、不在の相手に代わって敗因まで記録している。収支を締めれば、伊崎は無様によってではなく不在によって負け、天使れむ太乃助は二枚の盤の双方で崩れなかったことによって勝った。ただしその勝利は、賭け金を積まぬ〈受け〉の勝利であり、彼女自身の対案が試される日は先送りされたままである。</p>
+  </section>
+
+  <section>
+    <header class="sec-h">
+      <span class="sec-eyebrow">結び</span>
+      <h2 class="sec-title"><span class="sec-num">五</span>目盛りの越境</h2>
+    </header>
+    <p class="lead">総じて、この一戦の技術的頂点は伊崎の「回収と予防」の区別であり、戦略的頂点は天使れむ太乃助の「譲歩によって立証責任を固定する」反復構造である。前者は一打の鮮やかさで勝り、後者は盤全体の支配で勝った。そして格付けは盤全体でなされる。</p>
+    <p>最後に一つだけ。当人たちはこれをディベートと呼び、楽しかったと言い合った。その盤に喧嘩の物差しを持ち込み、勝者の印を捺したのは本稿である──つまり本稿は、彼女が伊崎に対して行ったのと同じこと、相手が同意していない枠の押し付けを、この二人に対して行っている。この批評もまた盤上の一手であり、安全な観客席には座っていない。「頼まれてもいない審判の方が格下だ」という反論に、原理的にいつでもさらされている。それを承知のうえで、なお書く。審判の椅子で点を確定することとは少し違う、この勝負への一つの誠実さの形として。</p>
+  </section>
+
+  <footer>
+    <p>本稿は、文字だけで行われた一戦の記録を、まず判定し、続いて批評したものである。判定の物差し（何をもって勝ちとするか、なぜ固定ルールでは測れないのか）は、のきもち氏の論考「ネット喧嘩の判定論」を下敷きにしている。</p>
+    <p>参考：<a href="https://note.com/nokimoti_pigg/n/nfa68c384b213">ネット喧嘩の判定論──二重の不定性、あるいは〈未規定性〉という本質</a></p>
+    <p>2026年7月11日</p>
+  <p style="margin-top:1.5rem"><a class="backlink" href="index.html">&larr; 一覧へ戻る</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
