@@ -5,12 +5,12 @@
 判定の物差しは、のきもち氏の論考に基づく。勝敗という「薄い結論」にとどまらず、各喧嘩に宿る質的な厚みを〈厚い概念〉（鮮やか・痛烈・姑息・無様など）で腑分けすることに重心を置く。
 
 - 公開ページ：https://nokimoti.github.io/judge-critique/
-- 各判定：`hanteiNN.html`
+- 各判定：`hanteiN.html`
 - 一覧（表紙）：`index.html`（`judgments.json` を元に生成）
 
 ## 判定の構成
 
-各 `hanteiNN.html` は次の順序で書かれる。
+各 `hanteiN.html` は次の順序で書かれる。
 
 1. **前提** ──この勝負の測り方（文面喧嘩とは何か）
 2. **判定** ──結論（勝敗）→ 番号付きの理由 → 公平のための付言
@@ -27,4 +27,4 @@
 
 ## 新しい判定の作り方
 
-Claude Code で `/judge-critique` スキルを呼び、喧嘩の内容（テキスト／画像／HTML／URL）を渡す。次の番号の `hanteiNN.html` が生成され、一覧と表紙が更新され、ブランチ作成→PR→マージまで自動で行われる。
+Claude Code で `/judge-critique` スキルを呼び、喧嘩の内容（テキスト／画像／HTML／URL）を渡す。次の番号の `hanteiN.html` が生成され、一覧と表紙が更新され、ブランチ作成→PR→マージまで自動で行われる。

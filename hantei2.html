@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あびす 対 わい ——判定と批評</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Noto+Serif+JP:wght@400;500;600&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --washi:#0c0d0f;
+    --washi-2:#17181c;
+    --sumi:#ECEDEA;
+    --sumi-soft:#AEB1B6;
+    --ai:#8FB3D4;
+    --ai-deep:#B6D2EA;
+    --shu:#E14B3A;
+    --shu-text:#EF6A54;
+    --kasumi:#8B8E94;
+    --rule:rgba(255,255,255,.09);
+    --rule-mid:rgba(255,255,255,.18);
+  }
+  *{box-sizing:border-box}
+  html{font-size:106.25%;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--washi);
+    color:var(--sumi);
+    font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    font-weight:400;
+    line-height:1.95;
+    letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:rgba(225,75,58,.30)}
+  .wrap{max-width:43rem;margin:0 auto;padding:0 1.6rem}
+
+  /* ---- masthead ---- */
+  .masthead{padding:5.5rem 0 0}
+  .eyebrow{
+    font-family:"Noto Sans JP",sans-serif;font-weight:700;
+    font-size:.72rem;letter-spacing:.42em;color:var(--shu-text);
+    margin:0 0 1.7rem;text-indent:.42em;
+  }
+  h1.title{
+    font-family:"Shippori Mincho",serif;font-weight:800;
+    font-size:clamp(2.5rem,8vw,3.7rem);line-height:1.12;
+    letter-spacing:.04em;margin:0;color:var(--sumi);
+  }
+  .subtitle{
+    font-family:"Shippori Mincho",serif;font-weight:500;
+    font-size:clamp(1.15rem,3.4vw,1.5rem);letter-spacing:.08em;
+    color:var(--ai);margin:.9rem 0 0;
+  }
+  .rule2{display:flex;align-items:center;gap:0;margin:2.2rem 0 1.6rem}
+  .rule2 .seg-a{height:2px;width:3.2rem;background:var(--shu)}
+  .rule2 .seg-b{height:1px;flex:1;background:var(--rule-mid)}
+  .dek{
+    font-size:1.04rem;color:var(--sumi-soft);margin:0;
+    line-height:1.95;
+  }
+  .meta-line{
+    font-family:"Noto Sans JP",sans-serif;font-weight:500;
+    font-size:.8rem;letter-spacing:.08em;color:var(--kasumi);
+    margin:1.5rem 0 0;
+  }
+  .meta-line b{color:var(--sumi);font-weight:700}
+
+  /* ---- generic section ---- */
+  section{padding:3.6rem 0 0}
+  .label{
+    font-family:"Noto Sans JP",sans-serif;font-weight:700;
+    font-size:.74rem;letter-spacing:.34em;color:var(--ai);
+    margin:0 0 1.1rem;text-indent:.34em;
+  }
+  p{margin:0 0 1.35rem}
+  p.lead{margin-top:.2rem}
+
+  /* ---- framing block ---- */
+  .frame{
+    border-top:1px solid var(--rule);
+    margin-top:3.4rem;padding-top:2.6rem;
+  }
+  .frame p{color:var(--sumi-soft)}
+
+  /* ---- verdict block ---- */
+  .verdict{
+    margin-top:3.6rem;
+    background:var(--washi-2);
+    border:1px solid var(--rule);
+    border-left:3px solid var(--shu);
+    padding:2.5rem 2rem 2.2rem;
+  }
+  .verdict .label{color:var(--shu-text)}
+  .verdict-head{
+    display:flex;flex-wrap:wrap;align-items:center;gap:1.1rem 1.4rem;
+    margin:0 0 1.7rem;
+  }
+  .verdict-lead{
+    font-family:"Shippori Mincho",serif;font-weight:600;
+    font-size:1.34rem;line-height:1.5;letter-spacing:.04em;
+    margin:0;color:var(--sumi);
+  }
+  .seal{
+    flex:0 0 auto;
+    display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
+    border:2px solid var(--shu);
+    color:var(--shu-text);
+    padding:.5rem .8rem .55rem;
+    transform:rotate(-3deg);
+    box-shadow:0 0 0 3px var(--washi-2),0 0 0 4px rgba(225,75,58,.40);
+  }
+  .seal .seal-k{font-family:"Noto Sans JP",sans-serif;font-weight:700;font-size:.6rem;letter-spacing:.3em;text-indent:.3em;margin-bottom:.18rem}
+  .seal .seal-n{font-family:"Shippori Mincho",serif;font-weight:800;font-size:1.4rem;letter-spacing:.06em;line-height:1}
+  .reason{margin:1.7rem 0 0}
+  .reason h3{
+    font-family:"Noto Sans JP",sans-serif;font-weight:700;
+    font-size:.96rem;letter-spacing:.04em;color:var(--ai-deep);
+    margin:0 0 .55rem;
+  }
+  .reason h3 .rn{color:var(--shu-text);margin-right:.5em}
+  .reason p{margin:0;color:var(--sumi)}
+  .verdict-note{
+    margin-top:2rem;padding-top:1.6rem;border-top:1px dashed var(--rule-mid);
+    font-size:.97rem;color:var(--sumi-soft);
+  }
+  .verdict-note p{margin:0 0 1rem}
+  .verdict-note p:last-child{margin:0}
+
+  /* ---- criticism sections ---- */
+  .crit-open{border-top:1px solid var(--rule);margin-top:4rem;padding-top:2.6rem}
+  .legend{
+    font-family:"Noto Sans JP",sans-serif;font-size:.78rem;
+    letter-spacing:.04em;color:var(--kasumi);
+    margin:0 0 .4rem;line-height:1.7;
+  }
+  .legend .mk{margin-right:.15em}
+  .sec-h{margin:0 0 1.6rem}
+  .sec-eyebrow{
+    font-family:"Noto Sans JP",sans-serif;font-weight:700;
+    font-size:.7rem;letter-spacing:.34em;color:var(--ai);
+    display:block;margin-bottom:.7rem;text-indent:.34em;
+  }
+  .sec-title{
+    font-family:"Shippori Mincho",serif;font-weight:600;
+    font-size:1.42rem;line-height:1.4;letter-spacing:.04em;
+    margin:0;color:var(--sumi);
+    display:flex;align-items:baseline;gap:.6rem;
+  }
+  .sec-num{
+    font-family:"Shippori Mincho",serif;font-weight:800;
+    font-size:2.5rem;line-height:.8;color:var(--ai);
+    flex:0 0 auto;letter-spacing:0;
+  }
+
+  /* inline marks & accents */
+  .mk{font-family:"Noto Sans JP",sans-serif;font-weight:700;color:var(--shu-text);font-size:.82em;display:inline-block}
+  .mk.up{}
+  .mk.down{}
+  .u{color:var(--shu-text)}
+  .k{color:var(--ai-deep);font-weight:500}
+  .nm{font-weight:600;letter-spacing:.03em}
+
+  /* ---- colophon ---- */
+  footer{
+    border-top:1px solid var(--rule);
+    margin-top:4.2rem;padding:2.4rem 0 5rem;
+    font-family:"Noto Sans JP",sans-serif;
+    font-size:.82rem;line-height:1.85;letter-spacing:.03em;color:var(--kasumi);
+  }
+  footer p{margin:0 0 .7rem}
+  footer a{color:var(--ai);text-decoration:none;border-bottom:1px solid rgba(143,179,212,.35);padding-bottom:1px}
+  footer a:hover{color:var(--shu-text);border-bottom-color:rgba(239,106,84,.55)}
+  a:focus-visible{outline:2px solid var(--shu);outline-offset:3px;border-radius:1px}
+
+  /* ---- motion ---- */
+  .anim{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+  .d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.27s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .anim{animation:none;opacity:1;transform:none}
+  }
+
+  /* ---- responsive ---- */
+  @media (max-width:560px){
+    html{font-size:100%}
+    .masthead{padding:3.8rem 0 0}
+    .verdict{padding:2rem 1.3rem 1.8rem}
+    .verdict-head{gap:1rem}
+    .sec-title{gap:.45rem}
+    .sec-num{font-size:2rem}
+    .seal{transform:rotate(-3deg) scale(.95)}
+  }
+  /* ---- top nav / back ---- */
+  .topnav{padding:1.8rem 0 0}
+  .backlink{display:inline-flex;align-items:center;gap:.4rem;font-family:"Noto Sans JP",sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.08em;color:var(--kasumi);text-decoration:none;border:1px solid var(--rule-mid);border-radius:999px;padding:.4rem .95rem;transition:color .15s ease,border-color .15s ease}
+  .backlink:hover{color:var(--shu-text);border-color:var(--shu)}
+  /* ---- source link (masthead) ---- */
+  .src-line{font-family:"Noto Sans JP",sans-serif;font-weight:500;font-size:.8rem;letter-spacing:.06em;color:var(--kasumi);margin:.7rem 0 0}
+  .src-line a{color:var(--ai);text-decoration:none;border-bottom:1px solid rgba(143,179,212,.4);padding-bottom:1px}
+  .src-line a:hover{color:var(--shu-text);border-bottom-color:var(--shu)}
+
+  /* ---- 原文収録（md埋め込み）---- */
+  .genba{border-top:1px solid var(--rule);margin-top:4.2rem;padding-top:2.4rem}
+  .genba>summary{
+    list-style:none;cursor:pointer;outline:none;
+    display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;
+    font-family:"Noto Sans JP",sans-serif;font-weight:700;
+    font-size:.74rem;letter-spacing:.34em;color:var(--ai);text-indent:.34em;
+  }
+  .genba>summary::-webkit-details-marker{display:none}
+  .genba>summary .tri{color:var(--shu-text);transition:transform .2s ease;text-indent:0;font-size:.7rem}
+  .genba[open]>summary .tri{transform:rotate(90deg)}
+  .genba>summary .s-sub{font-weight:500;font-size:.72rem;letter-spacing:.04em;color:var(--kasumi);text-indent:0}
+  .genba-inner{margin-top:2.1rem}
+  .situation{
+    background:var(--washi-2);border:1px solid var(--rule);border-left:3px solid var(--rule-mid);
+    padding:1.4rem 1.5rem;margin:0 0 1.8rem;
+    font-family:"Noto Sans JP",sans-serif;font-size:.84rem;line-height:1.85;color:var(--sumi-soft);
+  }
+  .situation .s-h{font-family:"Noto Sans JP",sans-serif;font-weight:700;color:var(--ai);letter-spacing:.14em;margin:0 0 .8rem;font-size:.78rem}
+  .situation ul{list-style:none;margin:0;padding:0}
+  .situation li{padding-left:1.1em;text-indent:-1.1em;margin:0 0 .4rem}
+  .situation li:last-child{margin:0}
+  .situation li::before{content:"・";color:var(--kasumi)}
+  .log{margin:0}
+  .msg{display:flex;gap:.85rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.045)}
+  .msg:last-child{border-bottom:none}
+  .msg .who{
+    flex:0 0 4.4rem;text-align:right;padding-top:.12rem;
+    font-family:"Noto Sans JP",sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.02em;line-height:1.7;
+    color:var(--kasumi);
+  }
+  .msg .who.abyss{color:var(--shu-text)}
+  .msg .who.wai{color:var(--ai-deep)}
+  .msg .who.anko{color:#C7A86A}
+  .msg .who.kera{color:var(--kasumi)}
+  .msg .body{
+    flex:1 1 auto;min-width:0;word-break:break-word;overflow-wrap:anywhere;
+    font-family:"Noto Sans JP",sans-serif;font-size:.88rem;line-height:1.85;color:var(--sumi);
+  }
+  .msg .stage{color:var(--kasumi);font-style:italic;font-size:.8rem}
+  @media (max-width:560px){
+    .msg{gap:.55rem}
+    .msg .who{flex-basis:3.3rem;font-size:.66rem}
+    .msg .body{font-size:.85rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav"><a class="backlink" href="index.html">&larr; 一覧へ戻る</a></nav>
+
+  <header class="masthead">
+    <p class="eyebrow anim d1">喧嘩　判定・批評</p>
+    <h1 class="title anim d1">あびす 対 わい</h1>
+    <p class="subtitle anim d2">「ばかそう」は射抜けたか</p>
+    <div class="rule2 anim d2"><span class="seg-a"></span><span class="seg-b"></span></div>
+    <p class="dek anim d3">舞台は入れ子になっている。通話では <span class="nm">にゃお</span> と <span class="nm">えす</span> が、<span class="nm">あんこ</span> を判定人に喧嘩していた。その周縁、テキストチャットで、<span class="nm">あびす</span> が <span class="nm">わい</span> の発言に「ばかそう」と斬り込んだ──これが本稿の一戦である。争点は「わいは馬鹿か」「わいは曲解したか」。告発を始めたのは あびす の側であり、わい は受けに回り続けた。本稿はまず、両者のどちらが勝ったかを理由とともに判定し、続いてその一手一手を批評する。</p>
+    <p class="meta-line anim d3">対戦：<b>あびす</b>（「ばかそう」と先に斬り込み、馬鹿・曲解を主張する側）　×　<b>わい</b>（告発の立証を求め、受けに回る側）</p>
+    <p class="src-line anim d3">元の喧嘩：<a href="#genba">本ページ末尾に全文を収録 ↓</a></p>
+  </header>
+
+  <!-- FRAMING -->
+  <section class="frame">
+    <p class="label">前提 ──この勝負の測り方</p>
+    <p class="lead">文面喧嘩は、議論やディベートとは似て非なるものである。そこで競われているのは「どちらの主張が論理的に正しいか」ではない。相手をいかに滑稽で、未熟で、格下の存在に見せ、その結果として自分を相対的に上へ置けるか──いわば〈存在の格付け〉の奪い合いである。論破は目的ではなく、そのための一手段にすぎない。</p>
+    <p>ゆえに評価は、論理と煽りを別々の採点表に分けてはならない。同じ反論でも、余裕をもって差し出されれば「相手を歯牙にもかけぬ冷静な解体」として効き、気色ばんで差し出されれば「図星を突かれた狼狽」として、差した本人の格を下げる。一手の意味は、つねに応酬全体のなかで定まる。そして最も避けるべき状態が〈無様〉──余裕を失って取り乱した、見るに堪えない無格好──であり、それは平素おのれを大きく見せていた者ほど、落差ゆえに痛烈に映る。固定したルールブックはなく、判定はそのつどの局面を読むほかない。なお、この一戦には皮肉がある。二人が言い争っている当の主題──「煽りでなんとでもなるのか、決め手は論理か」──は、この物差しそのものへの問いでもある。以下はその読みである。</p>
+  </section>
+
+  <!-- VERDICT -->
+  <section>
+    <div class="verdict">
+      <p class="label">判定</p>
+      <div class="verdict-head">
+        <p class="verdict-lead">結論から述べる。この一戦、勝者は わい である。圧勝ではない。際どい競り勝ちであり、引き分けと読む目も、あびす優勢と読む目も残る。だが軍配は、わずかに わい へ上がる。</p>
+        <span class="seal" aria-label="勝者 わい">
+          <span class="seal-k">勝</span>
+          <span class="seal-n">わい</span>
+        </span>
+      </div>
+
+      <div class="reason">
+        <h3><span class="rn">一</span>枠は握った、だが立証責任も背負った</h3>
+        <p>あびす は「ばかそう」の一語で先に斬り込み、わい を被告席へ着かせた。以後ずっと、わい は「自分は馬鹿でも曲解でもない」と弁明する側に回る。何を争うかを決める枠を握ったのは、確かに あびす である。だが「馬鹿だ」「曲解だ」と断ずる以上、その立証責任もまた あびす の肩に乗った。彼自身が掲げた基準──<span class="u">「妥当な解釈から外れている＝ねじ曲がっている」</span>──を、<span class="u">わい が解釈した時点で持ち得た情報だけ</span>を前提に示し切る。これが告発側の負う重荷であり、最後まで降ろせなかった。</p>
+      </div>
+
+      <div class="reason">
+        <h3><span class="rn">二</span>「曲解」という語が、戦いながら滑った（決め手）</h3>
+        <p>あびす の言う「曲解」の中身が、応酬のなかで三度ずれた。<span class="u">「妥当な解釈の範囲外」</span>→<span class="u">「範囲内ではあるが一番の最適解ではない」</span>→<span class="u">「最適でない解釈を、その場で主張する行為」</span>。わい はこの移動を正確に捉え、辞書の定義（素直に受け取らず、ねじ曲げて解釈すること）を引いて、「お前はずっと俺の“解釈”がおかしいと言っていたはずだ、いつから“主張する行為”の話になった」と差し戻した。告発の語が立証の途中で形を変えるとき、削っているはずの刃は、握る手のほうを浅く裂く。</p>
+      </div>
+
+      <div class="reason">
+        <h3><span class="rn">三</span>後出しの正解で、過去の推論を裁いた</h3>
+        <p>あびす は、わい の読みが誤りである根拠に <span class="nm">あんこ</span> の<span class="u">“後の判定”</span>を持ち出した。判定時の あんこ は あびす と同じことを言っていた、ゆえに当時の真意もそれだった、と。だが わい が解釈した時点で、その真意はまだ<span class="u">ブラックボックス</span>だった。あびす 自身も<span class="u">「隠れた変数は度外視」</span>と認めている。後から開示された正解で、情報の足りなかった時点の推論を「曲解」と断ずるのは、円環である。わい の<span class="u">「俺の解釈時点の情報だけを前提に、論理的に不合理だと示せ」</span>という要求は、最後まで満たされなかった。これが本戦における わい の最も鋭い一線である。</p>
+      </div>
+
+      <div class="reason">
+        <h3><span class="rn">四</span>崩れの差 ──〈無様〉の勘定</h3>
+        <p>この様式で最も重い物差しは、どちらが取り乱したか、である。あびす は <span class="u">「面白くねーんだよ」「頭悪いとここまで話通じねーのかよ」「早くして」「少し寝たい」</span> と苛立ちを声に出し、なお長文の再反論を重ねた。退屈の表明は、本来は「相手を歯牙にもかけぬ余裕」たりうる。だが、退屈を<span class="u">口に出しながら立ち去れず食い下がる</span>姿は、余裕ではなく図星の狼狽に近づく。わい は終始受けながら崩れず、終盤はむしろ <span class="u">「ここ逃げるねーw」「どっからこの主張出てきたの？w」</span> と、診断する側へ回った。撃ち込んだはずの側が苛立ち、受けた側が平静のまま笑う──この逆転が、際どい収支を わい へ傾けた。</p>
+      </div>
+
+      <div class="verdict-note">
+        <p>ただし、天秤を片側へ振り切らぬために付言する。<b>設計の芯では、むしろ あびす に分があった。</b>判定を求める文脈で あんこ の文面を読むなら、「可愛いと言った≠真に可愛いと思っていた／えすは論理で抜けられる」という読みのほうが自然であり、わい 自身もそれを認めている。そして あびす が終始主張していたこと──論争の決め手は論理であり、煽りはそれを損なわぬ範囲でのみ許される──は、皮肉にも、この判定が依拠する喧嘩論（論理と煽りは分離不可能、「論理で負け煽りで勝つ」はありえない）にほとんど重なる。喧嘩“理論”の正しさなら、あびす に軍配が上がってよい。</p>
+        <p>わい にも明確な失点がある。<b>長い。</b>幾度も「まとめて」と言わせ、枝葉の問いで話を広げた。「俺が当時持っていた情報だけで裁け」という防壁は強力だが、ときに「だから俺の読みは妥当だったろう」と滑り込ませる瞬間があり、立証責任を相手に預けたまま自説を通そうとする気配が残る。あびす が <span class="u">「詭弁」</span>と名指したのは、ここに半分は当たっている。</p>
+        <p>そして最大の異論を正面から置く。<b>「短い一語で相手を被告席に据え、相手が長文で必死に弁明し続けた」その非対称こそ あびす の格の証だ、と読む目は十分に成り立つ。</b>喧嘩は論点の帳尻合わせではなく格の演出であり、わい が段落を費やして「馬鹿ではない」と踊らされ続けた事実をもって あびす 優勢、とできる。本稿が なお わい を採るのは、ただ一点──理屈で正しい側が、その正しさを<span class="u">自らの基準で閉じきれず</span>、かつ<span class="u">苛立ちを露わにしたまま立ち去れなかった</span>から、削り合いの収支がわずかに傾いた、と見たからにすぎない。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRITICISM -->
+  <section class="crit-open">
+    <p class="label">批評 ──過程の腑分け</p>
+    <p class="legend"><span class="mk up">▲</span>＝相手の格を削った／自らの格を上げた有効手　<span class="mk down">▼</span>＝自らの格を下げた手</p>
+  </section>
+
+  <section>
+    <header class="sec-h">
+      <span class="sec-eyebrow">序盤</span>
+      <h2 class="sec-title"><span class="sec-num">一</span>「ばかそう」という抜き打ち</h2>
+    </header>
+    <p class="lead"><span class="mk up">▲</span>あびす の初手は速い。わい が「喧嘩という土俵なら、論理的な正しさがあっても煽り側の返し方でなんとでもなる、という話かな」と確認した、その尻に <span class="u">「ばかそう」</span> を置く。一語で相手を品定めの台に載せる──枠取りとしては鋭い。わい の<span class="u">「どこが？」</span>に応じて中身（可愛いと言った≠真に可愛い、という論理飛躍の指摘）を差し出した運びも、初動としては悪くない。</p>
+    <p><span class="mk down">▼</span>だが抜き打ちには代償がある。「ばかそう」は、撃った瞬間に立証義務を発生させる手でもある。以後 あびす は、「なぜ馬鹿か」「どこが曲解か」を、相手の土俵（わい は通話をほとんど聞いておらず、手元の情報が薄い）で示し続けねばならない。<span class="mk up">▲</span>わい の受けは巧かった。<span class="u">「あびすの解釈は、口頭を聞いていたなら自然なのかもしれない。でも口頭を聞いていない俺からは、この解釈で止まることもある、という話になるんじゃない？」</span>──相手の読みの正しさを一度認めたうえで、争点を「どちらが自然か」から「俺の読みは“あり得ない”ほどか」へ静かにずらした。被告席に座らされながら、座り心地のいい椅子を自分で選んだ。</p>
+  </section>
+
+  <section>
+    <header class="sec-h">
+      <span class="sec-eyebrow">主戦</span>
+      <h2 class="sec-title"><span class="sec-num">二</span>「曲解」の輪郭が溶ける</h2>
+    </header>
+    <p class="lead">この喧嘩の主戦場は、煽りでも比喩でもなく、たった二語の定義──「曲解」と「妥当」──の奪い合いだった。あびす は当初、わい の読みを<span class="u">「妥当な解釈から外れている」</span>＝範囲の外、と置いた。ところが問い詰められると、<span class="u">「適切と言えるものは妥当、一番に限らない」</span>と幅を持たせ、最終的には<span class="u">「一番が俺、二番が君」</span>と、わい の読みを<span class="u">妥当な範囲の“内側”</span>に置き直してしまう。</p>
+    <p><span class="mk up">▲</span>わい はここを離さなかった。<span class="u">「前は“範囲の外”と言っていたのに、今は“範囲の中だが最適ではない”になっている。曲解の定義がずれていないか」</span>。さらに辞書を引き、「曲解とは、素直に受け取らずねじ曲げて解釈すること」だと示して、<span class="u">「で、結局、俺の“解釈”自体は曲解ではないんだね？　ここに答えて」</span>と的を絞る。これは効いた。告発の核語が戦いの最中に形を変えたと露呈すれば、削られていたはずの「わいの愚かさ」より先に、「あびすの立論の不安定さ」が前景化する。<span class="mk down">▼</span>あびす の応答──「中身そのものではなく、その場でそれを主張する“行為”全体を曲解と呼ぶ」──は、語の救済としては苦しい。字義（コトバンクの定義）から明らかに遠ざかっており、わい の<span class="u">「逃げるねーw」</span>に格好の隙を与えた。</p>
+  </section>
+
+  <section>
+    <header class="sec-h">
+      <span class="sec-eyebrow">中盤</span>
+      <h2 class="sec-title"><span class="sec-num">三</span>後出しの正解、隠れた変数</h2>
+    </header>
+    <p class="lead">あびす の立論の背骨は、<span class="nm">あんこ</span> の判定を<span class="u">模範解答</span>として召喚することにあった。曰く──あんこ は判定時、あびす と同じ筋（可愛いと言ったかではなく、どういう意味で言ったか）を語っていた。ならば わい にレスを返した時点の あんこ の真意も、それと同質だったと推定できる。ゆえに わい の読みは外れ＝曲解だ、と。</p>
+    <p><span class="mk up">▲</span>これに対する わい の一線は、本戦でもっとも理が通っている。<span class="u">「俺が解釈した時点では、その真意は結局ブラックボックスだった。情報が足りないまま推論して結果的に外したことと、最初から不合理な読みだったことは別だ。後から判明した正解ではなく、俺が当時持っていた情報だけを前提に、俺の読みが論理的に不合理だと示してくれ」</span>。これは「結果の誤り」と「過程の不合理」を切り分ける、まっとうな要求である。あびす 自身が<span class="u">「隠れた変数は度外視」</span>「ブラックボックス」だったと認めている以上、その隠れた変数を後から開いて過去の手を裁くのは、円環に踏み込む。</p>
+    <p><span class="mk down">▼</span>あびす の返しは、ここで二手に分かれ、どちらも決め手を欠いた。ひとつは <span class="u">「情報がなくても、論争では論理が重視されると分かるはずだ」</span>──だが これは「わい は当時それを論争だと知っていたはず」という、まさに わい が争っている前提を結論に先取りしている（わい は自分をニワカと認め、あんこ が論理喧嘩の使い手だとも知らないと言っている）。もうひとつは <span class="u">「あんこ の判定を持ち出すのは無意味ではない、指標にはなる」</span>──「無意味ではない」は正しいが、それは「だから当時のわいの読みは不合理」を支えるには弱すぎる。指標の存在は、立証の完了ではない。</p>
+  </section>
+
+  <section>
+    <header class="sec-h">
+      <span class="sec-eyebrow">収支</span>
+      <h2 class="sec-title"><span class="sec-num">四</span>藁人形と、苛立ちの露出</h2>
+    </header>
+    <p class="lead"><span class="mk down">▼</span>あびす は一度、わい の「なんとでもなる」を<span class="u">「煽りは論理より強い、という主張」</span>と読み、そう反論しかけた。ところが わい に「俺はそうは言っていない、強さの面で煽りにも論理にも振れていない」と正され、あびす 自身も<span class="u">「論理より強いなんて言ってない」</span>と一度は引き取った。にもかかわらず終盤、<span class="u">「0〜10すべて煽りで構成されたものを全面的に評価して勝ちに繋げるのは不自然」</span>という、同じ藁人形を再投入してしまう。わい の<span class="u">「それはストローマンだ」</span>は妥当で、あびす の反論は<span class="u">「社会通念上それが相当か」</span>という一般論へ逃げた。自分で一度撤回した読みを、形勢が苦しくなって拾い直す──退却の再利用は、格を削る。</p>
+    <p>とはいえ、わい の側にも〈無様〉の芽はある。<span class="mk down">▼</span>第一に、冗長。あびす に<span class="u">「スマホで1画面に収まるくらいに」</span>と要約を命じられるほど膨らんだ弁明は、勝っていても「必死さ」と読まれる賭けである。第二に、質問攻め。<span class="u">「〜はどうなの？」</span>と枝を広げる手は、相手の足場を崩すと同時に、自分が結論を出せていない印象も残す。あびす の<span class="u">「どうでもいいことばっかに話広げんなやカス」</span>は罵倒だが、苛立ちの出どころには半分の理がある。</p>
+    <p><span class="mk down">▼</span>そして あびす の罵倒群──<span class="u">「ガイジ」「キチガイ」「カス」</span>。この様式で真に練達した者は、禁止語に頼らず、優雅な語彙だけで相手の空疎さを描いて解体してみせる。音量ではなく精度で。あびす の語彙は要所で音量へ傾き、勢いはあっても鮮やかさの域には届かない。<span class="mk up">▲</span>収支を分けたのは、結局これだ。あびす は理屈の芯を握りながら、その芯を<span class="u">字義のずれ・先取り・後出し・藁人形・罵倒</span>で自ら曇らせ、退屈を口にしながら立ち去れなかった。わい は受けに徹し、薄い手札のまま崩れず、最後に笑った。優雅な解体による勝ちではない。<span class="u">相手の自滅を、薄い情報のまま取りこぼさなかった</span>ことによる勝ちである。</p>
+  </section>
+
+  <section>
+    <header class="sec-h">
+      <span class="sec-eyebrow">結び</span>
+      <h2 class="sec-title"><span class="sec-num">五</span>盤の上から</h2>
+    </header>
+    <p class="lead">総じて、種としては あびす の見立てが正しかった。論争の決め手は論理だ、という彼の芯は、この判定の物差しと響き合いさえする。だが喧嘩は、正しい見立てを持つ者ではなく、それを<span class="u">取り乱さずに差し切る</span>者の手に落ちる。立証を自らの基準で閉じられず、苛立ちを露わにし、撤回した藁人形を拾い直した──その三点で、撃ち込んだ あびす の重心が浮き、受けた わい の足が残った。<span class="u">「定義の滑り」</span>と<span class="u">「後出しの正解への異議」</span>が、この一戦で最も有効に相手の格を削った二手である。</p>
+    <p>最後に一つ。本稿は「短く撃った側」ではなく「長く受けた側」に軍配を上げた。これは、喧嘩を“格の演出”として見るこの物差し自身に対する、最も鋭い反論にいつでもさらされている選択である──「必死に弁明し続けた者を勝ちと呼ぶその読みこそ、格を見誤っているのではないか」と。こうして勝敗を言い切り、一手一手を腑分けする批評それ自体もまた、ひとつの格付けであり、安全な観客席にいるわけではない。あびす が わい にしたのと同じく、私もまた一つの読みを「妥当」と称して差し出している。その手が後から「曲解だ」と差し戻される可能性を、原理的に閉じることはできない。それを承知のうえで、なお書く。審判の椅子に座って点を確定することとは少し違う、この勝負への一つの誠実さの形として。</p>
+  </section>
+
+  <details class="genba" id="genba">
+    <summary><span class="tri">▶</span>元の喧嘩 ──全文収録<span class="s-sub">〈状況説明〉.md の埋め込み・クリックで展開</span></summary>
+    <div class="genba-inner">
+      <div class="situation">
+        <p class="s-h">〈状況説明〉</p>
+        <ul>
+          <li>「にゃお」と「えす」という人物がdiscordというアプリ（discordとはテキスト・音声・ビデオ通話を手軽に行えるコミュニケーションプラットフォーム）の通話内で喧嘩をしていた。</li>
+          <li>「あんこ」という人物が判定人。</li>
+          <li>通話でにゃおとえすが喧嘩している中、テキストチャットでは、その喧嘩に関連して様々な話題が飛び交っていた。</li>
+          <li>そのような話の中で、「あびす」という人物が「わい」の発言に対してバカそうと言いそこから始まった。</li>
+          <li>「わいが馬鹿か否か」「わいが曲解をしたのか否か」などという論点で話が進んでいった。</li>
+          <li>馬鹿や曲解を主張していたり、し始めたのはあびす側。</li>
+        </ul>
+      </div>
+      <div class="log">
+        <div class="msg"><div class="who kera">ケラケラ</div><div class="body">にゃおは論理でえすが煽り</div></div>
+        <div class="msg"><div class="who anko">あんこ</div><div class="body">論理vs煽りは至上命題デスネ〜</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">あんこさんはどっちをより重視するんですか？</div></div>
+        <div class="msg"><div class="who anko">あんこ</div><div class="body"><span class="stage">（リプライ機能を使い、わいに返信）</span><br>そんなことも知らねえならお前はニワカだね</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">喧嘩界隈短いのでニワカなのはそうですね</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">だまれ<br>認めるな馬鹿</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">これ認めたらだめなん</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">正味判定人としての価値観聞いた感じだから経験値とかの話でしかないと思うんだけど</div></div>
+        <div class="msg"><div class="who anko">あんこ</div><div class="body"><span class="stage">（わいの「ここ認めたらダメなん」にリプライ）</span><br>えす「可愛いと言ってない」<br>にゃお「実際言ってたよね？」<br>えす「ゲームをしたくて利用するために言ってただけで口説く目的では無い」<br>にゃお「じゃあ論破だね」<br>えす側はどうとでも返せる<br>えすぶっちゃけめっちゃ強くね</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">喧嘩という土俵だったら論理的な正しさがあっても煽り側の返し方でなんとでもなるって話なんかな</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">ばかそう</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">どこが？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">煽りとかじゃなくて<br>単純にかわいいっていうことでメリットを享受するには可愛いといったが真として可愛いと思って行ったわけではないっていう論理が通るただそれだけ<br>可愛いといったから可愛いが真ってのは論理飛躍があるって話でしょ単純に</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">かわいいって言ったかどうかって話に移行するまでの話によるやん<br>俺あんまり通話のにゃおとえすの喧嘩聞いてないから覚えてないよ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">一文目抽象的だからもっとふかぼって</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">例えば、にゃおにはネタでもかわいいって言うやつなんていないでしょとかの発言から始まった話だったらそこに含まれる本心とか関係なく可愛いって言ったかどうかっていう単体で見れるくない？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">なんの話をしてるの？<br>お前があんこの話に関して煽りがどうとかいってたやつの話にバカそうって俺がいったわけじゃんそれに対する払拭の反論になってるん？それ<br><br>単純に<br>あんこの発言として<br>可愛いと発言したからといって可愛いと思っていたり真として可愛いかは別って話なのに煽りだからどうとでも言えるってこと？<br>って解釈することがバカそうだなっていってるんだけど</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">あびすの解釈は別に口頭の内容聞いてたら自然なのかもしれないけど、口頭の内容あんまり聞いてない俺からしたら別にこういう解釈で止まることもあるって話になるんじゃない？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">いや文面での話だわ俺も口頭ほぼ聞いてないけどあんこの文面に対してそういった曲解解釈することがバカって言ってる</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">別にかわいいって言われたことによってメリットを享受しなくてもいい場合があるよねって話</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">だからそれがなんやねん<br>なんの払拭になんの</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">だから俺はそっち側の考え方で解釈しただけだよ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">だからそれがバカだって言ってるあんこへのお前のレスみろ</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">これあんこさんの話はカギ括弧の引用のところとえす側はどうとでも返せるってとこ繋がってんじゃないの？だからそこが結論であることを前提として解釈したんだけど</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">どうとでも返せるってのさ煽り関係ねーよ可愛いと言った理由が可愛いと思ってるわけではないことを示せることなんて山ほどあるからって意味だわ</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">鉤括弧の対話の後にえすがどうとでも返せるって話だと解釈したんだけどあびすの話は鉤括弧のえすの、「ゲームをしたくて利用するために言ってただけで口説く目的では無い」にかかってるって解釈してるように見える<br>ここら辺の解釈の違いを曲解とまでは思わんかな</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">だからゲームしたくて利用のところが<br>煽り関係ねーって話</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">おれはその後のにゃおの「じゃあ論破だね」に対してえすがどうとでも返せるって話だと解釈した</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">そうだとしても煽りどこに関係してるの？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">喧嘩としてだったら、煽りでいくらでも巻き返せるよねってことだと思った</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">アホ？にゃおの最後の「」の中が論破ってのが成立したら<br>喧嘩としても煽るだけだったら<br>ただのガイジだろう<br>だから論破と言われても〜の意味としてとか、目的があった</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">そこら辺込みでおれはどっちが勝ちになるのかわかんないから聞いたね<br>だってガイジってうぜーじゃん<br>喧嘩って相手に不快感与えたら勝ちみたいなとこあるやん</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">お前はバカ？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">まあでもあびすのいう解釈の方がより自然なのはわかるよ<br>だとしても曲解とまで言われるのはよくわかんないし<br>そこから同じくバカとまで言われるのもわかんないかな</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">ガイジかな<br>あんこの文面はどういう真意や伝えたいことあるのかをどう解釈するかって話において<br>お前にリプしたわけでもお前の話を汲み取ったわけでもないあんこの文面に対し<br>お前の真意が付随されたものとして解釈も可能かって話をしてると勘違いした脳みそがキチガイだなって言ってんだよ</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">お前にリプしたわけではないあんこの文面ってどれ？<br><br>えす「可愛いと言ってない」<br>にゃお「実際言ってたよね？」<br>えす「ゲームをしたくて利用するために言ってただけで口説く目的では無い」<br>にゃお「じゃあ論破だね」<br>って言ってるね<br>えす側はどうとでも返せる<br><br>これはリプライできてるよ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">えす「可愛いと言ってない」<br>にゃお「実際言ってたよね？」<br>えす「ゲームをしたくて利用するために言ってただけで口説く目的では無い」<br>にゃお「じゃあ論破だね」<br>って言ってるね<br>えす側はどうとでも返せる<br><br>ここだね<br><br>いや<br>お前の<br>その論理に対してのね<br>お前が〜と聞いた部分に<br>あんこが返したと思ってるの？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">おれの「あんこさんはどっちをより重視するんですか？」に対するものだと思ってる<br>直接的な答えじゃなかったとしても俺にリプライ飛ばしてるならそこら辺に答えてもらったと思ってる</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">ええ<br>お前はにわかだねって一蹴されたのに？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">それじゃなかったとしたらリプライの意図があんまよくわかんないんだけど<br>そこは都合よくツンデレみたいなもんと解釈した<br>まあ憎まれ口叩いた後に質問の応答って別にそんな不自然じゃないと思うけどね</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">都合いい解釈したんでしょ？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">そこのミス見逃して<br>「まあ憎まれ口叩いた後に質問の応答って別にそんな不自然じゃないと思うけどね」<br>正味こっちなら自然でしょ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">だとしても<br>お前の真意が付随してると思ってる？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">未知<br>どうも思ってない<br><br>今言われて、どちらの可能性もあるだろうなーって思ったくらい</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">あんこはお前の真意に沿った上で話を展開したと？<br>その可能性が高いの？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">適当に流しちゃったけどここでいう真意ってなに？論破が成立してたとしても喧嘩だったらガイジみたいに煽っても〜とかそこら辺の流れを汲んだ話？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">YES</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">まあこれに関係なく可能性の高い低いで言えば別にそこまで高くはないけど低くも無いんじゃない？って言っとこうかな</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">なぜ低くもないの？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">根拠が見つけられないから</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">いや根拠あるでしょ<br><br>あんこがお前のそのお前の真意を認知してるかつ、お前の真意と考えと同じどあるっていう条件じゃないと<br>お前の真意を汲み取った上でお前にレスしてるっていう可能性があがらないからね<br>隠れた変数は度外視してる<br>予測の余地がないから<br>局所的ね</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body"><span class="stage">（少し時間が経ち）</span><br>早くして</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">難しいんだもん</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">あんこはお前の真意をにんちしてたの？<br>その状態において</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">認知って言葉の意味あんま正確に把握してないから認知かは知らんけど、こうだろうなって理解してた可能性はあるんじゃない？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">1%とか極端に低い可能性を可能性あるとか言わないで</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">そこまで低いとは思わないけども</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">妥当な答えを出して<br>なんであんこに〜ってどう思う？ってきいただけでお前の真意を汲み取ってる可能性が妥当と言える？？<br>お前も俺の解釈の方が自然って認めてるわけだけど</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">俺が喧嘩界隈においてにわかって認めたからね</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">そっちじゃねーよ<br>煽り云々の話<br><br>「あびすの解釈は別に口頭の内容聞いてたら自然なのかもしれないけど、口頭の内容あんまり聞いてない俺からしたら別にこういう解釈で止まることもあるって話になるんじゃない？」ってとこの話<br><br>明らかにあんこって判定下してた時に<br>論理的な部分に対して評価してたよね</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">いやそこら辺も聞いてないんよ<br>まあそうなのね</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">あ、そう<br>んで判定を下す時って<br>煽りも重視される傾向にあるけど<br>論理が重視されがちでしょ</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">いやそこの質問なんよ<br>そうなのねの連続でしかない</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">簡潔に述べて<br>少し寝たい</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">んーじゃあ一旦話戻すけど<br>まずこれって俺の解釈が曲解かとか馬鹿かって話でしょ？<br>俺は別にあんこさんが俺の真意を認知してたとかは考えてないんだよねまず<br>ただ文脈からこうなのかなって思って解釈しただけ<br>あんこさんの真意とか抜きに、そこの文脈からの解釈を否定できない以上<br>曲解とまでは言えないやん</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">やっぱりバカなん<br>あんこがお前に対してレスしている以上なんであんこの真意を抜きにするの？<br>お前はあんこに対して〜ってことかってレスしてるわけじゃん<br>それってあんこの伝えたいことをお前が解釈してたわけでしょ？<br>それはあんこのレスに対する曲解解釈じゃんって言ってるの</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">隠れた変数度外視って言ってたけどそこなんじゃない？<br>あんこさんの真意なんてわかんねーのまま解釈を進めただけでしょ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">論理喧嘩やってる人が<br>煽りならなんとでも言えるからえす優勢だよねーみたいな話すると思ってんの？<br>だから俺はお前の解釈より俺の解釈よりだと思ってるよ<br>でもそれが見えない以上隠れた変数だから</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">いやあんこさんが論理喧嘩やってるとかも知らないんよ<br>にわかって言ったやん</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">うん<br>だから<br>そこは度外視でいいよねって言ってる<br>あくまで確定させるものじゃなくて<br>どれが妥当かって話しかしてない<br>その妥当な解釈から外れているから曲解って言ってる</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">妥当かっていうのは1番適切って話をしてんの？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">うん</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">1番適切＝妥当？<br>二番目に適切だったら曲解なの？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">まあ適切だと言えるものは妥当かな一番に限らず<br>というかお前の解釈は適切でないと思ってる</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">んー<br>今回のあんこさんの文への解釈ってさ<br>色んな要素を考えた上でこっちが妥当とかこっちは不適切って言ってるわけだよね？<br>で今最終的に話してるのって文脈的なところじゃなくて、あんこさんがおれの意図？真意？とかを理解してない可能性が高いんだから俺の解釈は適切じゃないってことだよね？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">どっちの問いもそうだね<br>論争の判定を聞くにあたって論理ではなく煽り全面にプッシュして〜優勢っていうこと自体が<br>まず可能性として低いでしょ<br>まず煽りがどう言ったものなのかも説明されてない中でね<br>だから論争やディベートの判定を聞いた際に、どうとでも言えるものだからえすが強いって発言として妥当なのは<br>煽りとかじゃなくて、論理的にどのような話をしても論理が瓦解することがあんまねーよなって話が妥当でしょ</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">いやその論理ではなく煽り全面にプッシュして優勢かどうかとかもわからんのよ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">なんでわからんの？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">にわかだから</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">それはなんの反論にもなってない<br>にわかだからこその曲解解釈になるんだから</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">にわかだから曲解したって話？<br>にできること？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">いやお前がにわかだったとしても<br>にわかじゃなかったとしても<br>同じ結論に達したら曲解解釈だと思うし<br>今回それが起因したのもあるんじゃね？って話</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">じゃあだとしたらおれ馬鹿じゃないやん</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">知識不足を馬鹿という</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">一旦説明する<br><br>まず今回の話はあんこさんがどう考えているか（俺の真意を認知しているか）からする解釈の仕方と文脈的な面からする解釈の仕方で分けながら進められてたよね<br>その上でさっき書いた文章で途中で書くのを辞めちゃったのがあるんだけど、続きがあるからそこから進めていくね。<br><br>「今回のあんこさんの文への解釈ってさ<br>色んな要素を考えた上でこっちが妥当とかこっちは不適切って言ってるわけだよね？<br>で今最終的に話してるのって文脈的なところじゃなくて、あんこさんがおれの意図？真意？とかを理解してない可能性が高いんだから俺の解釈は適切じゃないってことだよね？」<br><br>ここの続き<br>色々な要素を考えた上で、適切とか不適切を判断してるのにも関わらず、文脈だけからみたら不適切でない解釈に対して、あんこさんが俺の意図を理解している可能性が低いという一つの要素のみで解釈を不適切というのはどうなの？しかも結局ブラックボックスであり、隠れた変数があることは認めてるんだよね？だとしたらその隠れた変数度外視って部分はめちゃくちゃ大事だし、そこが明確にならないなら俺の解釈が不適切って言えなくない？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">あんこのレスに対しての解釈なのに自分の真意と文脈に依存させることがまずキチガイ<br>それと判定を下した際にあんこは俺と同じこと言ってるよ<br>だからお前がレスを返された際にブラックボックスだったとしてもあんこの判定に反映されたものをその時の真意とするなら<br>隠れた変数はすでに開示されてる<br>乙</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">その時に開示されててもって感じじゃない？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">はい？<br>あんこが判定した時の真意をその隠れた変数と同質とするなら</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">俺の解釈時点で明確じゃなかったらおれの解釈時点で俺の解釈が不適切って言えないやん</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">それを伝える目的でのレスに<br>お前が間違ったものとして伝わっているなら<br>曲解じゃん</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">曲解ってどういう意味で使ってんの？<br>というか<br>どの程度として捉えてるの？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">第三者に妥当に伝わるものを解釈せず、捻じ曲がった解釈をしてしまうこと</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">第三者をどういう人物でおくかによるなそれ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">そんな話してません</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">論争界隈に精通してる人物って置くなら曲解なんじゃね</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">社会通念の話においてです</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">だれでもって言ってんの？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">そんなことも言ってません<br>大体こう言われたら正常な頭の人ならAもしくはAに近しい意図を感じることができるって話をしています</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">知識不足に起因するところもあるって話だったけどそこはどうなん<br>喧嘩界隈の知識を社会通念的にみんなが認知してるとは思えんけど</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">だから知識不足をバカだと思ってると言っています<br>喧嘩界隈の知識だけに収まらず<br>論理的思考力を身についている人なら伝わると思っています</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">そこはもう固定でいいの？<br>あー<br>論理的思考力の方もあるならそっち深ぼって</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">お前がふかぼれや<br>気になる点あるならお前が聞け<br>俺からペラペラ喋る気はない</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">背景知識が欠けてても論理的思考力がちゃんとしてたら俺の方の解釈にはなりようがないって言ってんの？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">そうだね<br>今回フリートークなどではなく煽りなどはあったが論題が決まっていたよね</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">そこも知らん<br>論題何？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">その場合、煽りだけでなんとでも言えるって思う人はかなり少数だとおもいますよ<br><br>「そこも知らん」だからなに？<span class="stage">（カギ括弧にリプライ）</span></div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">だからなに？というか知らんから何？って話</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">論題はにゃお関連の話<br>書いてあったから遡って</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">あれ変えてもいいよーみたいに言われてたやつやん<br>そこは聞いてたよ<br><br>にゃおVSえす<br>論題:にゃおがキモイかキモくないか<br>これ？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">うんそれ</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">ここのとこは聞いてたけど、あんこさんが別に論題とかはなんでもいい、ここの部分は変えていいよって言ってたよ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">だからなんですか？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">だから見返してもわからん</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">実際その論題に準拠した部分でせめぎ合っていてそこの部分の判定をしているのだから<br>なんら影響ないと思いますが？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">そうなの？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">はい</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">この論題から始まってたの？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">その論題から始まったかどうかは知らないけど<br>判定時及びあんこがレスを返した際はその論点です</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">あびすはにゃおとえすの論争どんくらい聞いてた？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">最後の方</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">じゃあかわいいって言ったかどうかみたいな話は聞いてないのか</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">きいてます</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">え？<br>その話に移行するときってどう移行してた？<br>なんでその話が始まったのか知りたい<br><br>てかそういえば俺の<br>喧嘩という土俵だったら論理的な正しさがあっても煽り側の返し方でなんとでもなるって話なんかな<br>って話は煽りは論理より強いって解釈したわけではないよ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">その話だけど。<br>論理より強いなんて言ってない</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">理解してんのか<br>途中で論理喧嘩するあんこさんが論理より煽りが強いなんて言うわけないとか言ってたから勘違いしてるかなって思った<br><br>まあじゃあ戻るけど、「なんでその話が始まったのか」ってとこ答えて欲しい</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">そこ知らんけどそこをいうことで何が変わるの？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">一旦それに答えるために逆に質問するけど<br>あびすの「実際その論題に準拠した部分でせめぎ合っていてそこの部分の判定をしているのだから」<br>このせめぎ合っていてって何を指してるの？<br>にゃおvsえすの論争を全体的に見た時の話？<br>それとも可愛いって言ったかどうかっていう局所的な話？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">それとも可愛いって言ったかどうかっていう局所的な話 こっちと<br>にゃお関連の設定された論題</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">なにそれ<br>前半は「それとも可愛いって言ったかどうかっていう局所的な話」だと思うけどそれ以外のにゃお関連の設定された論題って後半で出てきたであろうもの？<br>俺は聞いてないからこう表現するしかないけども</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">にゃおがきもいかが論題です</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">それをにゃお関連の設定された論題って言ってるの？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">設定された論題だね<br>それは誰かが決めたかもしれないし、喧嘩してる両者の中で論点が定まったのかもしれないし</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">それってフリートークなんじゃないん</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">別にそこ重要じゃない<br>フリートークをしていたが、一つ論点が定まり、議論及びディベートにフェーズが移ることなんて山ほどある<br><br>というか君は何が言いたいの？<br>〜はどうなの？みたいなどうでもいいことばっかに話広げんなやカス<br>面白くねーんだよ<br>頭悪いとここまで話通じねーのかよ</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">俺は最初から言ってるけどこれって結局かわいいって言ったかどうかって争点に移行するまでの話によると思うんだよ<br>だってそれがわかんないとにゃおとえすの論争において、かわいいって言ったかどうかだけが大事なのか、かわいいって真に思っていたかどうかまで示す必要があったのかもわからないじゃん<br>てかあびすの話的にはかわいいって言ったかどうかって争点に移行するまでの流れ知らないんだよね？じゃあなんでこの二択（もしくはもっと多いかもしれない）の中から可愛いって真に思っているかどうかが大事って話をしてるってわかるの？<br>まあかわいいって言ったかどうかに移行したあとの話はちょっと聞いたみたいなこと言ってたからそこから理解したって言うならそれまでなんだけどさ。でも俺はそこを聞いてなかったんだから、その時点でその解釈以外を排除できる材料は持ってなくない？<br><br>でちょっと話戻すけど<br><br>「だからお前がレスを返された際にブラックボックスだったとしてもあんこの判定に反映されたものをその時の真意とするなら<br>隠れた変数はすでに開示されてる」<br>ここらへんの話さっきも言ったけどやっぱおかしいよね<br>だって俺が解釈した時点ではその真意は結局ブラックボックスだったわけじゃん<br>情報が足りない状態で推論して、結果的に解釈が事実と違っていたことと、最初から不合理な解釈だったことは別じゃない？仮にあびすの定義でそれを曲解と呼ぶとしても、その曲解が必要な情報を持っていなかったことに起因するなら、そこから俺の論理的思考力不足まではまだ証明されてなくない？<br>だから曲解だとかバカ（論理的な方）って言いたいなら、俺が持ってる今回の論争に対する情報を把握した上で、その俺が持ってる少ない情報だけを前提としても、俺の解釈は論理的に不合理ってことを示さないといけないよ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">長いからまとめて</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">結構短くしたつもりなんだけどな<br>じゃあ要点だけとりあえずまとめる<br>後から読む必要があるってなったらこの文読んで<br>どんくらい短くすればいいか目安教えて</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">スマホのスクロールしなくても1画面に収まるくらい</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">おけ<br><br>最初から言ってるけど、これって結局かわいいって言ったかどうかって争点に移行するまでの話によると思ってるんだけど、俺はその話に移行するまでの流れを聞いてなかったから、「かわいいって言ったかどうかが争点だったのか」「本当にかわいいと思っていたかまでが争点だったのか」を判断する材料を持ってなかった<br>だから俺は当時持ってた情報の範囲で解釈しただけ<br>で、後からあんこさんの真意や判定内容が分かった結果、その解釈が事実と違っていたとしても、情報が足りない状態で推論して結果的に外したことと、最初から不合理な解釈だったことは別だと思う<br>仮にあびすの定義でそれを曲解と呼ぶとしても、そこから俺が論理的能力不足の意味でバカだとはまだ言えなくない？<br>だから俺を曲解だとか論理的にバカだと言うなら、後から判明した情報じゃなくて、俺がその時点で持っていた情報だけを前提にしても、その解釈は論理的におかしいってことを示さないといけないと思う</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">あんこの文面にはそれはすでに含まれていた<br>えす「かわいいとはいっていない」<br>にゃお「実際言っていたよね」<br>えす「目的があった」<br>にゃお「論破だね」<br>みたいな流れだから<br>可愛いと言ったことはえすは認めていてかつ、その可愛いと言った意味やどういう意味で可愛いと言ったのかを着目するのが順当<br>そこを汲み取れないのがまさに馬鹿</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">これ、真に可愛いと思っていたかどうかが争点だって確定できる根拠があったって話でいい？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">確定させるものではないが容易に想起できる内容があんこの文面にはあった</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">確定じゃないなら、容易に想起できる解釈があることと、それ以外の解釈が合理的候補から外れることは別じゃない？<br>まず俺の質問の始まりはあんこさんの論理vs煽りって話からだったし、その直前にも他の人からにゃおは論理でえすは煽りって発言が出てるんだから、その状態で、利用するために可愛いって言っただけって発言を見た時に、論理的反論と読むこともできるけど、煽り混じりの切り返し、喧嘩上の立ち回り、論点ずらしとかって読む余地は全然あると思うよ<br>だから容易に想起できるってのは分かるとしても、俺が論理的思考力不足の馬鹿とまでは示せてなくない？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">あんこの真意を汲み取る際に容易に想起できるものを妥当な解釈として採択するのではなく、煽り云々を採択したのがバカって言ってるんだよ<br>その時点で確定はしていないが、あんこの判定の際には確定していたし、あんこが伝えたかったことは何かというものの精査を行う際にあたって一番整合性が高いものを選ばなければいけないのにそれ以外を採択する行動をバカだといってる<br>ほかの可能性や結果を想起したりすること自体は否定していない<br>ただし整合性のある答えを排斥し別の答えを出した結果、あんこの言いたいことはそれではなかった❗️<br>↪︎この構図愚かでしょ</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">まず俺は、あびす側の解釈を排斥して、俺側の解釈を断定的に採択したわけじゃないよ<br>実際、俺の発言は「〜って話なんかな」って確認するような形だったよね<br>しかも前に言ったみたいに、直前には論理vs煽りの文脈があったよね<br>それに加えて、あんこさんの文面には「えす側はどうとでも返せる」とか「これ、えすぶっちゃけめっちゃ強くねw」みたいな評価もある<br>あびすは、解釈する対象の文面の内部からの根拠を挙げてるけど俺は会話全体の文脈からの根拠を挙げてる<br>だから、あびすの読みが整合的だとしても、俺の読みが合理的候補から外れるとは言えなくない？<br>結局あびすが示せてるのは、自分の解釈の方が整合性が高いってとこまでであって、俺の解釈が合理的候補から外れるとか、確認形で読んだだけの俺が論理的思考力不足の馬鹿までは示せてないと思うよ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">排斥して断定した！って言ってるのではなく、真意をこうか？と確認する際に最も蓋然性の高いものを提示しないことを排斥していると言ってる<br>それに加えて文脈が〜どうこうも喧嘩、論争において決め手になるのは論理だろ<br>煽りが許されるのはカジティブのようなユーモアがあって尚且つ論理性が損なわれていないようなもので、0~10まで全て煽りで構成されているものや論理がなく煽りで構成されていると言って差し支えのないものを全面的に評価し勝ちに繋げるというのはこの場の性質上不自然でしかない<br>それを鑑みるとやっぱり整合性が一番保てるのは俺の言ってる主張でありそれを導けないのはバカだと感じるけどこれ不自然？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">「てかそういえば俺の<br>喧嘩という土俵だったら論理的な正しさがあっても煽り側の返し方でなんとでもなるって話なんかな<br>って話は煽りは論理より強いって解釈したわけではないよ」<br>ここで、俺の発言は煽りは論理より強いって話じゃないって言ってるから、あびすの言う<br>「0〜10まで全部煽りで構成されてるものを全面的に評価して勝ちに繋げるのは不自然」<br>とかそこら辺はストローマンにしか見えないし、反論にはならないと思うよ<br><br>で「整合性をいちばん保ててるのは俺の主張」って言ってるけどここもズレてるなーって感じ<br>あびすの主張と俺の主張で整合性どちらが保ててますか？って話は今してなくて、今話してるのは俺の主張が合理的候補から外れるのかって話だよ<br>あびすの解釈と俺の解釈の間にどれくらい大きな差があるかってことが言えないと意味ないよ<br><br>これで方向性戻せると思うけどいけるかな</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">どこがストローマンなん？<br>俺そこにしっかり補強してるとこあって<br>ほぼ煽りで構成されてると言って差し支えのないものって言ってるでしょんで、今回君が言ってるのは論理度外視で論理vs煽りの件であんこの発言を解釈して<br>煽りを全面的にブラッシュアップしたものと解釈したわけだろ？<br>んで俺が言ってるのは<br>その解釈が整合性がないって言ってるわけではなく<br>”その解釈よりも遥かに整合性が取れた解釈のモデルを採択しないこど”について言及してる<br>それを鑑みた際にお前バカじゃね？っていうのはおかしいの？</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">ほぼ煽りで構成されてるってぼかしても正直そこは変わらん<br>俺の解釈は、強さの面で煽りと論理どちらにも揺れないってものだからね<br>てかそういえばだけど<br>俺の解釈にも整合性があるなら俺の解釈ってあびすの言う曲解の定義「ねじ曲がった解釈」に合致しないやん<br>そして「遥かに整合性が取れた」って言うなら遥かにって部分を俺が解釈時点で持ち得た情報の範囲で示して欲しいね</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">機能し続けたとして、喧嘩の性質や主張がどう言ったものか？っていうものに対して<br>ほぼ煽り⇨でも喧嘩の勝敗として重視されるのは論理<br>これの何がおかしいの？君の解釈とか関係なくね？<br>ストローマンと言えるかどうかって君の中の解釈ではなく、社会通念上それが相当と言えるかで話すべき<br><br>俺の言ってることを理解して<br><br>俺の言ってることはあくまで一番整合性が取れているものと比べた際にどうなのかって話<br>あんこの文面の中で最も妥当なものと比べたらその解釈、捻じ曲がってね？となるのは順当でしょ<br>それに加えて、あんこの判定を抜きにする必要はない<br>なぜならば、お前とあんこが文脈を共有しているのであればあんこの答えがその中で妥当であったと示す可能性のある指標になる<br>あんこがお前と前提を共有していたなかであんこが自然と返したプロセス<br>そしてあんこの判定<br>これが前者が順当と言えるならそれはあんこの真意を汲み取るという上であんこの判定を模範解答とするのは自然</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">時間かけたのに申し訳ないんだけど理解できない部分あるから何個か質問させて欲しい<br>まず1つ目<br>あびすが言う「お前とあんこが文脈を共有」の文脈って何の話をしてる？<br>1　俺が当時実際見てた範囲（論理vs煽りの流れ、あんこさんのにゃおとえすのカギ括弧のとこ）<br>2　試合の中身全体（可愛いと言ったかなどの話になった経緯、論題の推移）<br>3　両方<br>ここら辺だと思うけどどれ？<br>2つ目<br>あんこさんの判定の位置づけをどうかんがえてるのかもう少し明確にして欲しい<br>あんこさんの真意の正解そのものとして捉えてるって話？<br>3つ目<br>あびすの言う「遥かに整合性が取れた」ってのは何を基準に測った差なの？<br>俺が解釈した時点で持ってた情報だけで測った差？<br>あんこの人物像や後の判定も込みで測った差？<br>4つ目<br>俺の解釈について<br>俺の読みは妥当な解釈の範囲の外＝ねじ曲がってるって言ってるのか、それとも範囲内ではあるけど、一番妥当な読みじゃなかったって言ってるのかどっち？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">一つ目<br>1<br><br>2つ目<br>あんこの真意が正解そのものとして投影されているのではなく、あんこが判定の際にお前にリプした時の流れと同じ話をして「なんとでもいえる」のような話をしているのであればその時のあんこの判定には判定の説明として同じような真意が含まれていると考えるのが妥当<br><br>3<br>その場における何が妥当かという点においてで測ったこと<br>お前が持ってる情報なんて俺は把握できないだろ<br><br>4<br>俺は妥当、不妥当はその精度によりランクづけされていて、もし仮に一番妥当なのが俺の主張、二番目がきみの主張、そして3,4,5とさまざまな解釈があったとしてもその場における最適解および妥当といえるのは1だと考えてる<br>だから容易に想起できるものをまず排斥した上での君の主張は捻じ曲がってるといってる</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">2がまだよくわからんわ<br>判定のときのあんこさんの発言が当時のリプと同じ系統なら、当時の真意もそこから推定できるってことでいい？<br>答えて貰えたら次長めに書く</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">同じものに対しての言及なら、十分関連していたり同質なものである可能性が高いということ</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">ここからは前回の俺の質問を①～④とする。 ③について 俺はずっと言ってるけど、俺が解釈時点で持ってる情報基準じゃないと、論理的思考力不足とか曲解は示せない。与えられてるものが違うんだからね。論理ってのはさ、与えられてるものを整理したり、それらがどう繋がってるかとかそれらをどう組み合わせるのかって話でしょ？それなのにあびすが言ってるのって俺が持ってない部品を持ち出して、こっちの部品使わないのなんで？おかしくない？って言ってるだけじゃん<br>あんこさんの判定についても同じで、②の質問の答えからも、「可能性が高い推定」なだけだし、それは結局解釈時点ではあんまり意味ないよね<br>「遥かに整合性が取れた解釈」これがあるのに他を選んだのが問題みたいに言ってたけどここも同じね。この「遥かに」の部分を俺の解釈時点の情報基準で示さないと意味ないから、示せるなら示して<br>④について<br>あびす独自の排斥の定義があるって言ってたけどそれ字義から外れすぎじゃね？ってことで排斥はしてない、俺の当時の発言はただの確認形、疑問形。<br>で、④であびすって俺の解釈を2番目として話をすすめてる。まあつまり妥当の範囲内ではあるって話だね。でもあびすって過去に「妥当な解釈から外れているから曲解って言ってる」って言ってるよね。これ曲解とかの定義ずれてない？前は妥当な範囲の外って言ってたのに今回は妥当な範囲の中だけど最適解じゃないって話になってんじゃん。で1番じゃなくても今回あんま関係ないよね</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">3において<br>お前が情報を持ってない❗️とかいっててもその場の流れやディベートや論争において論理を重視されるという点を鑑みたら読み取れると思うけどね<br>前も言ったけど、こういう場において煽りに重点をおいて勝ち負けを決めるなら論理を競う場は瓦解する<br>んで2に関してもその場において何が生合成が取れてるかはその時点で妥当な選択肢を用いることが重要<br>んで俺は解釈された時点でそれは容易に想起できると再三に渡っていってる<br>最後の文言に対しては主張の中身自体を曲解と言ってるのではなく、主張の中身とその場においてそれを主張すること<br>つまり主張全体を曲解された捻じ曲がった主張と言ってる<br>なぜならばそれは最適解ではないからだってこと<br>その場においてその解釈をすることは妥当なのか？それを主張することは妥当なのか？ということ<br>解釈なんて一つの文言から多岐にわたって解釈できるわけでその中で他者に主張する際にそれを全面的にプッシュすること自体への批判</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">早いね返信<br>よみます</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">補足<br>喧嘩界隈の情報やあんこの人物像がわからない場合でも、煽りの話があったから煽りならどうとでも言えるからえす優勢！みたいなディベートの本質や論争における喧嘩で煽りならどうとでも言えるから煽りで勝敗が分かれるんだ！みたいな稚拙で浅はかな考え方は曲解だし、まともな頭してたらそんな解釈は採択せず論理においてどういう意味をなしてるのかをまず考えるのが妥当だしそのフィールドにおける整合性が保たれる<br>でなければディスカッションやディベートは瓦解するからね<br>だから情報不足はよほど些細な問題ですらない</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">これまじでこれでいいのか？まあいいけど<br>で、前も聞いたけどあとどんくらいやる？<br>まあこれは適当な時に答えてくれればいいや<br>ちょっとずつ反論書きますわ</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">判定人いないしやめるならやめるでいい<br>情報不足で文脈の話もあったからこうなるのは論理的思考力がないとは言えないんダーみたいな詭弁続けたいならどうぞ<br>暇つぶしに空いた時間でやりますよ^_^</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">ええw<br>まあそっちが俺に反対する立場だからそのムーブなのか</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">すごく単純な論理式なんだけど<br>喧嘩界隈に詳しくなくてもディベートや論争において論理を低く見積もって煽り重視で勝ち負けを決めるのかなり不妥当だよねって話</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">質問攻めはしないけど長くなりそう</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">うん<br>適当に決めて</div></div>
+        <div class="msg"><div class="who wai">わい</div><div class="body">おけ<br><br>＞ ディベートや論争において論理を重視される点を鑑みたら読み取れる<br>ディベートに限れば自明でそうだろうね。でも俺の発言って「喧嘩なら〜」って話だしそんな話されても困る。別にディベートで論理が重要なのはわかった上で、喧嘩とかの界隈においてはそこの価値基準が違うのでは？→あんこさんは論理と煽りどっち重視？ って質問の流れなんだから、そんなよくわからん話されても意味不明。<br>言っとくけどにゃおvsえすの喧嘩がディベートかどうかとかは知らない<br>あんこさんの判定ではディベート的な判定だった〜とかの情報があったとしても後出しのその情報は無意味<br>＞ 煽りに重点をおいて<br>別に重点おいてない。そんな解釈はしてない。<br><br>ずっと勘違いしてそうだからここでまた補足しとくけど、俺は煽りと論理で煽りの方が強いなんて話はしてない。あびすもおれがそういう話をしてないって認めてた。<br>＞ 論理を競う場が瓦解<br>どの程度の話をしてるかよくわからん<br>短くするために一旦説明省くけど問題性あるようには思えん<br>＞ 解釈された時点で容易に想起できる<br>じゃあその想起できる情報だけから「遥かに」の立証をしてね。そしてその「容易に」も示してね。<br>＞ 主張の中身自体を曲解と言っているのではなく、主張全体を曲解と言ってる<br>ここ逃げるねーw 主張の中身って言い換えたのはそこを解釈って言うと、その次の文言が意味わかんなくなるからだろ？<br><br>きょっ‐かい〔キヨク‐〕【曲解】<br>［名］物事や相手の言動などを素直に受け取らないで、ねじまげて解釈すること。また、その解釈。<br>⤴︎コトバンク参照<br>あびすの曲解の定義<br>「妥当な解釈から外れている＝妥当な解釈の範囲外」→「妥当な解釈の範囲ではあるが、1番の最適解ではない」→「最適でない解釈を主張する行為」<br>お前はずっと俺の解釈がおかしい！って話をしてたように見えるけど？wどっからこの主張出てきたの？w<br>で結局じゃあ俺の解釈自体は曲解ではないんだね？ここ答えてね<br>＞ 全面的にプッシュ<br>これもどの程度の話してんの？w 全面的にプッシュってなんなん。排斥だの全面的にプッシュだの意味わかんねー誇張表現ばっか使いやがって。確認系、疑問形って話したよね？どこが全面的にプッシュしてんの。<br>補足部分について　<br>＞ 煽りならどうとでも言えるから煽りで勝敗が分かれるんだ！みたいな稚拙で浅はかな考え方は曲解だし、まともな頭してたらそんな解釈は採択せず～<br>読みにくいからよくわからんけどこれは結局なに？俺の解釈自体が曲解って言いたいの？<br>直前の「中身自体を曲解と言ってない」って話はなんだったの？</div></div>
+        <div class="msg"><div class="who abyss">あびす</div><div class="body">喧嘩という場であっても言い換えればネット論争な訳だよね<br>ならそれは論理が重視されるというのは自明だと思うけど<br><br>あんこの判定が今回の場において意味をなさないというのも暴論だね<br>あんこがお前との対話と同じ文言や同じ流れを引用して言及しているなら、お前との対話でも同質または近しい真意を用いてる可能性は高いと言えるし、仮に高いとまで言えなくても無意味だといえるほど今回の俺らの話の根拠として使えないと言えないだろ<br><br>解釈された時点で容易に想起できる<br>↪︎これは何度も言ってるけど、ネットにおける喧嘩、ディベート、論争などは煽りを使うことはあれど判定の核や主張の核は論理で構成されているため、煽りにより勝敗を決めるものではなく論理的にどう言った意味をなすのかを考えるのが妥当という点からだね<br><br>主張の中身の部分も君だいぶ暴論で、主張する側、主張される側があるとした時に、主張された側はその主張自体にその解釈はこの場ではおかしいと感じるなんて往々にあるわけでしょ<br>ならば学術的ディスカッションではない場において、主張自体を解釈と呼ぶ場合もあり、深掘られ細分化が必要になった際に、言葉を明示的にわけることが脆弱な構成だとは思わないけどな<br><br>だから帰結するものとして再三に渡って俺が主張しているのは<br>解釈（自身の中で構成されるもの）は多岐にわたって並列に存在しうるものであるが、それを主張し他者に主張及び解釈として観測された際にはその場の属性や状態、状況に応じで曲解解釈だと捉えることがあるって話<br><br>全面的にプッシュの部分も、論争を行う場所において判定を行うのは論理の観点やディスカッションにおいて感情論やレッテル貼りによるものは論理として扱わないことを鑑みた際に、煽りならどうとでも言えるから煽ってる方が優勢または勝ちであるのようなものとして解釈しようものならその場の属性が瓦解することを鑑みるにそれを全面的に押し出し主張することはいかがなものかと？という話。プッシュはあまり使わないのか知らないけど、pushなんて簡単な英単語だから読み取れるだろうし、そこまで不自然？<br><br>論理核といったのも喧嘩凸自体にランク付けなどもこのサーバでは"論争"レートと論理基準であるかのようなレート付けを行っているし、喧嘩凸配信者なども論理構成で喧嘩凸を行っているよね<br>論理が土台で煽りは補強材料なのがみてとれるでしょ<br>しかも勝敗判定もついてるわけでしょ<br>ならそこには勝敗をつける、競技性があるわけでそれを煽りならなんとでもいえるみたいな抽象度が高く競技性が乏しいものではなく勝敗を決めるポイントは論理性という第三者にも判定できるポイントなのは確かだろ</div></div>
+      </div>
+    </div>
+  </details>
+
+  <footer>
+    <p>本稿は、文字だけで行われた一戦の記録を、まず判定し、続いて批評したものである。判定の物差し（何をもって勝ちとするか、なぜ固定ルールでは測れないのか）は、のきもち氏の論考「ネット喧嘩の判定論」を下敷きにしている。</p>
+    <p>参考：<a href="https://note.com/nokimoti_pigg/n/nfa68c384b213">ネット喧嘩の判定論──二重の不定性、あるいは〈未規定性〉という本質</a></p>
+    <p>2026年6月29日</p>
+  <p style="margin-top:1.5rem"><a class="backlink" href="index.html">&larr; 一覧へ戻る</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
